@@ -139,6 +139,19 @@ npx husky install
 
 ## This ensures Git hooks are correctly set up.
 
+## Authentication
+
+To enable Auth0 authentication, create a `.env.local` file in the project root with the following variables:
+
+```bash
+AUTH0_CLIENT_ID=your-auth0-client-id
+AUTH0_CLIENT_SECRET=your-auth0-client-secret
+AUTH0_ISSUER_BASE_URL=https://your-auth0-domain
+NEXTAUTH_URL=http://localhost:3000
+```
+
+The app uses [next-auth](https://next-auth.js.org/) with the Auth0 provider. Update these values with your Auth0 application credentials.
+
 ## 📄 License
 
 [MIT](LICENSE) • Project developed by Dunamis Tech community
