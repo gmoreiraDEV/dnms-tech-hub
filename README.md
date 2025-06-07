@@ -1,6 +1,6 @@
 # DNMS Tech | Hub Platform
 
-## A web platform built with Next.js, React 19, and Tailwind CSS to connect the Christian tech community.
+Connecting purpose, faith and technology.
 
 ## 🚀 Running the Project Locally
 
