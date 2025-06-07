@@ -141,7 +141,7 @@ npx husky install
 
 ## Authentication
 
-To enable Auth0 authentication, create a `.env.local` file in the project root with the following variables:
+To enable Auth0 authentication, copy `.env-exempla` to `.env.local` and set the following variables:
 
 ```bash
 AUTH0_CLIENT_ID=your-auth0-client-id
