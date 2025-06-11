@@ -8,39 +8,70 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  password  String?
-  name      String?
-  profile   Profile?
-  sessions  Session[]
-  projects  Project[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  profile       Profile?
+  projects      Project[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
-model Profile {
-  id       String  @id @default(cuid())
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String  @unique
-  bio      String?
-  image    String?
-  location String?
-  website  String?
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  token     String
-  expiresAt DateTime
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Profile {
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id])
+  bio         String?
+  location    String?
+  website     String?
+  socialMedia String?
+  image       String?
 }
 
 model Project {
   id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id])
   userId      String
+  user        User     @relation(fields: [userId], references: [id])
   name        String
   description String?
   createdAt   DateTime @default(now())
