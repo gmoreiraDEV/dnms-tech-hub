@@ -12,10 +12,15 @@
     "commit:all": "git add . && npm run commit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@prisma/client": "^6.9.0",
     "next": "15.3.3",
+    "next-auth": "^4.24.5",
+    "prisma": "^6.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next-auth": "^4.24.5"
+    "react-hook-form": "^7.57.0",
+    "zod": "^3.25.61"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
