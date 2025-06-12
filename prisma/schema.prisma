@@ -8,17 +8,24 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String   @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String   @unique
   emailVerified DateTime?
   password      String?
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
   projects      Project[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  role          Role      @default(USER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  USER
 }
 
 model Account {

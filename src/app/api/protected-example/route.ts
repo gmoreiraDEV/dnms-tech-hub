@@ -1,13 +1,20 @@
-import { getApiUser } from "@/lib/auth/getApiUser";
-import { NextResponse } from "next/server";
+import {getApiUser} from '@/lib/auth/getApiUser'
+import {prisma} from '@/lib/prisma'
+import {requireRole} from '@/lib/auth/requireRole'
+import {NextResponse} from 'next/server'
 
 export async function GET(req: Request) {
-    const user = getApiUser(req);
-    console.log(user);
+  const payload = getApiUser(req)
 
-    if (!user) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  if (!payload) {
+    return NextResponse.json({error: 'Unauthorized'}, {status: 401})
+  }
 
-    return NextResponse.json({ message: "Acesso autorizado!", user });
+  const user = await prisma.user.findUnique({where: {id: payload.userId}})
+
+  if (!user || !requireRole(user, ['ADMIN'])) {
+    return NextResponse.json({error: 'Forbidden'}, {status: 403})
+  }
+
+  return NextResponse.json({message: 'Admin access granted.'})
 }
