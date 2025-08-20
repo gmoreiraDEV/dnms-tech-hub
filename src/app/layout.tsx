@@ -24,9 +24,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning={true} data-lt-installed={true}>
+    <html
+      lang='pt-BR'
+      suppressHydrationWarning={true}
+      data-lt-installed={true}
+      className='size-full'
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased size-full`}
       >
         <SessionProvider>{children}</SessionProvider>
       </body>
