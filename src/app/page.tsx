@@ -2,7 +2,7 @@
 
 import {useRouter} from 'next/navigation'
 import {useEffect} from 'react'
-import {useSupabaseSession} from '@/lib/supabase/use-supabase-session'
+import {useSupabaseSession} from '@/hooks/use-supabase-session'
 
 export default function Home() {
   const {session, status} = useSupabaseSession()
