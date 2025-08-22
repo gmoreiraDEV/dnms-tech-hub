@@ -108,6 +108,7 @@ export default function RegisterPage() {
                       <div className='relative'>
                         <Input
                           {...register('password')}
+                          type='password'
                           placeholder='********'
                           className='border-[#e7e7e7] text-sm placeholder:text-[#5d5d5d] pr-10'
                           eyeIcon={EyeIcon}
@@ -127,6 +128,7 @@ export default function RegisterPage() {
                       <div className='relative'>
                         <Input
                           {...register('confirmPassword')}
+                          type='password'
                           placeholder='********'
                           className='border-[#e7e7e7] text-sm placeholder:text-[#5d5d5d] pr-10'
                           eyeIcon={EyeIcon}

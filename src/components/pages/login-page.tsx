@@ -38,12 +38,8 @@ export default function LoginPageComponent() {
 
       if (error) throw new Error(error.message)
       router.push('/')
-    } catch (error: unknown) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : 'Ops, alguma coisa deu errado. Por favor, tente novamente!'
-      )
+    } catch {
+      toast.error('Ops, alguma coisa deu errado. Por favor, tente novamente!')
     }
   }
 
@@ -98,6 +94,7 @@ export default function LoginPageComponent() {
                       <div className='relative'>
                         <Input
                           {...register('password')}
+                          type='password'
                           placeholder='********'
                           className='border-[#e7e7e7] text-sm placeholder:text-[#5d5d5d] pr-10'
                           eyeIcon={EyeIcon}

@@ -1,15 +1,30 @@
 'use client'
-import {useSession, signOut} from 'next-auth/react'
-import LoginPage from '@/components/pages/login-page'
+
+import {useRouter} from 'next/navigation'
+import {useEffect} from 'react'
+import {useSupabaseSession} from '@/lib/supabase/use-supabase-session'
 
 export default function Home() {
-  const {data: session} = useSession()
+  const {session, status} = useSupabaseSession()
+  const router = useRouter()
 
-  return session ? (
-    <button onClick={() => signOut()} className='px-3 py-1 border rounded'>
-      Sign out
-    </button>
-  ) : (
-    <LoginPage />
+  useEffect(() => {
+    if (status !== 'loading' && !session) {
+      router.push('/login')
+    }
+  }, [session, status, router])
+
+  if (status === 'loading') {
+    return <div>Loading...</div>
+  }
+
+  if (!session) {
+    return null
+  }
+
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
   )
 }
